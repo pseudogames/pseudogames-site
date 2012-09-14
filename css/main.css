@@ -83,13 +83,16 @@ hr.separator {
 
 h2 {
   margin-top:50px;
-  margin-bottom:-10px;
   background-color:rgba(204,200,45,1);
   background-color:rgba(0,93,255,1);
   color:#FFF;
   padding:10px;
   font-size:.7em;
   display: inline-block;
+}
+
+h2.section{
+  margin-bottom:-10px;
 }
 
 #footer {
