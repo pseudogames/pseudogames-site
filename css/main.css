@@ -18,17 +18,10 @@ body {
   opacity: 0.8;
 }
 
-h1 {
-  margin:0;
+.title h1 {
+  margin: .5em;
   font-size: 5em;
   color: #0000;
-}
-
-.opac {
-  filter: alpha(opacity=50);
-  -moz-opacity:0.5;
-  -khtml-opacity: 0.5;
-  opacity: 0.5;
 }
 
 .highlight-green{
@@ -38,7 +31,6 @@ h1 {
 .highlight-red {
   color:#B21912;
 }
-
 
 div.game {
   margin-top:50px;
