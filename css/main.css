@@ -19,9 +19,16 @@ body {
 }
 
 .title h1 {
-  margin: .5em;
+  margin-top: .5em;
+  margin-bottom: .5em;
   font-size: 5em;
   color: #0000;
+}
+
+.title .logo {
+	float:right;
+	margin-right: 2em;
+	margin-top: 2em;
 }
 
 .highlight-green{
