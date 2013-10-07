@@ -44,7 +44,7 @@ div.game {
 }
 
 .gamename {
-  font-size: 2.5em;
+  font-size: 2.25em;
   color:#B21912;
   filter: alpha(opacity=8);
   -moz-opacity:0.8;
