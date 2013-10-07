@@ -133,3 +133,19 @@ h2.section{
   color:rgba(204,200,45,1);
 }
 
+@keyframes blink {  
+    0% { border-color:red; }
+    100% { border-color:transparent; }
+}
+@-webkit-keyframes blink {
+    0% { border-color:red; }
+    100% { border-color:transparent; }
+}
+.download {
+    border: solid 1px red;
+    -webkit-animation: blink 0.5s linear infinite;
+    -moz-animation: blink 0.5s linear infinite;
+    -ms-animation: blink 0.5s linear infinite;
+    -o-animation: blink 0.5s linear infinite;
+    animation: blink 0.5s linear infinite;
+} 
