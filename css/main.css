@@ -690,7 +690,7 @@ span.name{
 		display:none !important;
 	}
 }
-@media (max-width:824px){
+@media (max-width:775px){
 	#container-isotope{
 		max-width: 500px;
 	}
