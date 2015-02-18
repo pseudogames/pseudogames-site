@@ -1,6 +1,7 @@
 # INSTALL
 
 ## /etc/nginx/sites-available/pseudogames
+```
 server {
 	server_name pseudogames.com;
 	root /site/pseudogames;
@@ -12,8 +13,9 @@ server {
 		rewrite ^/(.*\.html)$ /#/$1 redirect;
 	}
 }
-
+```
 ## /etc/nginx/sites-available/9hells
+```
 server {
 	server_name 9hells.org;
 	root /site/9hells;
@@ -24,4 +26,4 @@ server {
 	server_name *.9hells.org;
 	return 302 $scheme://pseudogames.com;
 }
-
+```
