@@ -452,6 +452,7 @@
 	 */
 
 	var openAjax = function(path) {
+		path += "?dl=1"; // XXX force nginx to download, not redirect to '/#/'+path
 		$('.container-footer').fadeOut(199);
 		$('.last-scroll').val($(document).scrollTop()); //current scroll posn to return to later
 		$('html').append('<img src="img/loading.gif" class="load-gif" style="z-index: 999"/>');
