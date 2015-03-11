@@ -9,7 +9,7 @@ server {
 	rewrite ^/ggj2013/mechabeats\.html$  http://pseudogames.com/release/2013-mechabeats/web/mechabeats.html redirect;
 	
 	set $uri_dl "$uri:$arg_dl";
-	if ( $uri_dl !~ "^/index.html|:1$" ) {
+	if ( $uri_dl !~ "^/index.html|/release/|:1$" ) {
 		rewrite ^/(.*\.html)$ /#/$1 redirect;
 	}
 }
