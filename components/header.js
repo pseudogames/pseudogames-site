@@ -1,5 +1,5 @@
 import React from 'react'
-import {merge} from 'next/css'
+import {merge, select as $} from 'next/css'
 
 import Flicker from '../components/_flicker'
 import Title from '../components/title'
@@ -31,8 +31,8 @@ const style = merge(
 		animationDuration: '6s',
 		animationName: 'glitch',
 	},
-	' a:hover': {
-		color: "black !important";
-	}
+	$(' a:hover', {
+		color: "black !important"
+	})
 );
 

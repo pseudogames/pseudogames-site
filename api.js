@@ -3,7 +3,7 @@ const fs = require('fs');
 const glob = require('glob');
 const debounce = require('debounce');
 
-const root = 'release';
+const root = 'static/release';
 var release = {};
 
 function parseMarkdown(filename) {
@@ -79,7 +79,8 @@ function processFile(filename) {
 	if(!index) return;
 	info = parseMarkdown(index);
 	if(!info) return;
-	info.media = glob.sync(`${base}/**/*.{jpeg,jpg,png,gif,mp4}`);
+	info.image = glob.sync(`${base}/**/*.{jpeg,jpg,png,gif}`);
+	info.video = glob.sync(`${base}/**/*.mp4`);
 	info.web = glob.sync(`${base}/**/web*/`);
 	info.bin = glob.sync(`${base}/**/*.zip`);
 	release[id] = info;
@@ -103,7 +104,6 @@ let server = http.createServer(function(request, response) {
 	let method = request.method;
 	let url = request.url;
 	let param = url.match(/^\/api\/project\/?(\w+)?$/)
-	console.log(url, param);
 	if(param) {
 		let id = param[1];
 		if(id) {
@@ -113,6 +113,7 @@ let server = http.createServer(function(request, response) {
 			result = ids.map(id => ({
 				id: id,
 				label: `${release[id].title} @ ${release[id].jam}, ${release[id].date}`,
+				cover: release[id].image[0],
 				date: parseInt((release[id].date || '1970-01-01').replace(/-/g,""))
 			})).sort((a,b) => a.date - b.date);
 		}
