@@ -8,18 +8,22 @@ var release = {};
 
 function parseMarkdown(filename) {
 	let content = fs.readFileSync(filename);
+	console.log(content);
 	if(!content) return;
-	let row = content.toString().split(/\n\r?/);
+	let row = content.toString().split(/\r?\n\r?/);
 	let info = {};
 	info.title = row.shift();
+	console.log(`'${row[0]}'`);
 	if(!row.shift().match(/^=+$/)) return;
+	console.log("magic");
 
-	info['data'] = [];
+	info['box'] = [];
 	while(row.length > 0) {
 		let part = row[0].match(/^\*\s+(\w+)\s*:\s*(.*)$/)
 		if(part) {
-			info.data.push(`${part[1]}: ${part[2]}`);
-			info[part[1]] = part[2];
+			let [, key, value] = part;
+			info.box.push(`${key}: ${value}`);
+			info[key] = value;
 			row.shift();
 		} else {
 			break;
@@ -48,14 +52,28 @@ function parseMarkdown(filename) {
 		for(i=0; i<raw.length; i++) {
 			let r = raw[i];
 			let empty = !r.match(/\S/);
-			r = r.replace(/^\* /,"");
-			let bullet = r != raw[i];
+			let r1 = r.replace(/^\* /,"");
+			let bullet1 = r1 != r;
+			let r2 = r1.replace(/^   - /,"");
+			let bullet2 = r2 != r1;
+			let colon = r.match(/:\s*$/);
+			r = r2.trim();
 			if(!empty) {
-				if(!section[j]) section[j] = "";
-				else section[j] += " ";
-				section[j] += r.trim();
+
+				if(section[j] !== undefined && Array.isArray(section[j]) != bullet2) {
+					j++;
+				}
+				if(bullet2) {
+					if(!section[j]) section[j] = [];
+					section[j].push(r);
+				} else {
+					if(!section[j]) section[j] = "";
+					else section[j] += " ";
+					section[j] += r;
+				}
+				if(colon) section[j] = [section[j]];
 			}
-			if(empty || bullet) j++;
+			if(empty || bullet1 && !colon) j++;
 		}
 
 		info[sec] = section;
@@ -69,17 +87,28 @@ function parseMarkdown(filename) {
 }
 
 
+var log = console.log;
 function processFile(filename) {
+	console.log = filename == 'static/release/bettybooptetris/bettybooptetris.md' ? log : () => 1;
+	console.log(filename);
 	let regex = new RegExp(`^${root}/(\\w+)/.*?(\\.md)?$`);
 	let part = filename.match(regex);
+	console.log("part", part);
 	if(!part) return;
 	let id = part[1];
 	let base = `${root}/${id}`;
 	let index = part[2] ? filename : glob.sync(`${base}/*.md`)[0];
+	console.log("index", index);
 	if(!index) return;
 	info = parseMarkdown(index);
+	console.log("info", info);
 	if(!info) return;
-	info.image = glob.sync(`${base}/**/*.{jpeg,jpg,png,gif}`);
+	info.image = glob.sync(`${base}/**/*.{jpeg,jpg,png,gif}`).filter( _ => {
+		let t = _.match(/thumb/);
+		if(t) info.thumb = _;
+		return !t;
+	});
+	if(!info.thumb) info.thumb = info.image[0];
 	info.video = glob.sync(`${base}/**/*.mp4`);
 	info.web = glob.sync(`${base}/**/web*/`);
 	info.bin = glob.sync(`${base}/**/*.zip`);
@@ -119,10 +148,12 @@ let server = http.createServer(function(request, response) {
 		}
 	}
 
+	response.writeHead(result ? 200 : 404, {
+		'Access-Control-Allow-Origin': '*'
+	});
+
 	if(result) {
 		response.write(JSON.stringify(result));
-	} else {
-		response.writeHead(404);
 	}
 	response.end();
 }).listen(3001);

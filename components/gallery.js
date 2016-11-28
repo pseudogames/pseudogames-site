@@ -4,9 +4,8 @@ import {merge, media, select as $} from 'next/css'
 
 export default (props) => {
 	var list = props.projects.map(p => {
-		let url = `/project/${p.id}`;
 		return <li key={p.id}>
-			<Link href={url}><figure><figcaption>{p.label}</figcaption><img src={p.cover} /></figure></Link>
+			<Link href={`/project?id=${p.id}`}><figure><figcaption>{p.label}</figcaption><img src={p.cover} /></figure></Link>
 		</li>
 	});
 
@@ -37,6 +36,12 @@ var style = merge(
 		height: 0,
 	}),
 
+	$(' li figure', {
+		display: 'block',
+		width: '100%',
+		height: 'auto',
+	}),
+
 	$(' li img', {
 		display: 'block',
 		width: '100%',
@@ -58,23 +63,13 @@ var style = merge(
 		display: 'block',
 	}),
 
+	media('(max-width:  600px)', $(' li', { flexBasis:  '33%'    })),
+	media('(max-width:  400px)', $(' li', { flexBasis:  '50%'    })),
+	media('(max-width:  200px)', $(' li', { flexBasis: '100%'    })),
+	media('(min-width: 1000px)', $(' li', { flexBasis:  '20%'    })),
+	media('(min-width: 1200px)', $(' li', { flexBasis:  '16.66%' })),
+	media('(min-width: 1400px)', $(' li', { flexBasis:  '14.28%' })),
+	media('(min-width: 1600px)', $(' li', { flexBasis:  '12.5%'  })),
 
-	...(
-		[
-			[ 600,  33   ],
-			[ 400,  50   ],
-			[ 200, 100   ],
-			[1000,  20   ],
-			[1200,  16.66],
-			[1400,  14.28],
-			[1600,  12.5 ],
-		].map(m => 
-			media(`(${m[0]<1000?'max':'min'}-width: ${m[0]}px)`, $(' li', { flexBasis: `${m[1]}%`} ))
-		)
-	)
-
-
-
-	
 );
 

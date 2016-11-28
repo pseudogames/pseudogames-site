@@ -20,8 +20,8 @@
     "node": ">= 6.6.0"
   },
   "scripts": {
-    "dev": "bash start.sh next \"supervisor -t -w api.js api\"",
-    "start": "bash start.sh \"next start\" \"node api\"",
+    "dev": "bash loop.sh next \"supervisor -t -w api.js api\"",
+    "start": "bash loop.sh \"next start\" \"node api\"",
     "build": "next build"
   },
   "devDependencies": {
