@@ -25,10 +25,10 @@ export default (props) => {
 const style = merge(
 	{
 		boxSizing: 'border-box',
-		width: '400px'
+		width: '400px',
+		breakInside: 'avoid'
 	},
-	media('(max-width:  400px)', { width: '100%' }),
-	//media('(min-width:  800px)', { width: '600px' }),
+	media('(max-width:  440px)', { width: '100%' }),
 
 	$(' ul', {
 		position: 'relative',

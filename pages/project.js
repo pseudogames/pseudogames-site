@@ -55,7 +55,7 @@ const style = merge(
 	},
 	media('(max-width:  400px)', { padding: '0.2em' }),
 	media('(min-width:  900px)', { columnCount: '2' }),
-	media('(min-width:  1400px)', { columnCount: '3' }),
+	media('(min-width:  1300px)', { columnCount: '3' }),
 	media('(min-width:  1800px)', { columnCount: '4' }),
 
 	$(' section', {
