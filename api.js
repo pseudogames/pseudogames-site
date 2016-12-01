@@ -125,7 +125,6 @@ function normPath(path) {
 }
 
 fs.watch(root, {recursive:true}, debounce((eventType, filename) => {
-	console.log(eventType, filename);
 	processFile(root+"/"+normPath(filename));
 }), 200, true);
 
@@ -151,7 +150,7 @@ let server = http.createServer(function(request, response) {
 					cover: release[id].image[0],
 					date: parseInt((release[id].date || '1970-01-01').replace(/-/g,""))
 				};
-			}).sort((a,b) => a.date - b.date);
+			}).sort((a,b) => b.date - a.date);
 		}
 	}
 
