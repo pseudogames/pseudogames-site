@@ -18,8 +18,8 @@ export default class extends React.Component {
 		let media = (p.video || []).concat(p.image || []);
 		let desc = <section>{p.description.map(row =>
 			!Array.isArray(row) ?
-			<section>{safe(row)}</section> : 
-			<section>{safe(row[0])}<ul>{row.slice(1).map(it => <li>{safe(it)}</li>)}</ul></section>
+			<p>{safe(row)}</p> : 
+			<div><p>{safe(row[0])}</p><ul>{row.slice(1).map(it => <li>{safe(it)}</li>)}</ul></div>
 		)}</section>;
 		let topics = ['control','credit'].filter(t => !!p[t]).map(t =>
 			<section>
@@ -48,18 +48,8 @@ export default class extends React.Component {
 
 const style = merge(
 	{
-		columnCount: '1',
-		columnGap: '1em',
-		columnRule: '1px solid black',
-		padding: '1em'
+		padding: '3%',
+		maxWidth: '800px',
 	},
-	media('(max-width:  400px)', { padding: '0.2em' }),
-	media('(min-width:  900px)', { columnCount: '2' }),
-	media('(min-width:  1300px)', { columnCount: '3' }),
-	media('(min-width:  1800px)', { columnCount: '4' }),
-
-	$(' section', {
-		flex: '0 0 400px',
-	})
 
 );

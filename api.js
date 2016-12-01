@@ -125,6 +125,7 @@ function normPath(path) {
 }
 
 fs.watch(root, {recursive:true}, debounce((eventType, filename) => {
+	console.log(eventType, filename);
 	processFile(root+"/"+normPath(filename));
 }), 200, true);
 
@@ -139,12 +140,18 @@ let server = http.createServer(function(request, response) {
 			result = release[id];
 		} else {
 			let ids = Object.keys(release);
-			result = ids.map(id => ({
-				id: id,
-				label: `${release[id].title} @ ${release[id].jam}, ${release[id].date}`,
-				cover: release[id].image[0],
-				date: parseInt((release[id].date || '1970-01-01').replace(/-/g,""))
-			})).sort((a,b) => a.date - b.date);
+			result = ids.map(id => {
+				let r = release[id];
+				let label = r.title;
+				if(r.jam) label += ` @ ${r.jam}`;
+				if(r.date) label += `, ${r.date.substring(0,4)}`;
+				return {
+					id: id,
+					label: label,
+					cover: release[id].image[0],
+					date: parseInt((release[id].date || '1970-01-01').replace(/-/g,""))
+				};
+			}).sort((a,b) => a.date - b.date);
 		}
 	}
 

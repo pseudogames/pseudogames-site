@@ -25,15 +25,22 @@ export default (props) => {
 const style = merge(
 	{
 		boxSizing: 'border-box',
-		width: '400px',
-		breakInside: 'avoid'
+		width: '100%',
+		maxWidth: '560px',
+		breakInside: 'avoid',
+		margin: 'auto',
 	},
-	media('(max-width:  440px)', { width: '100%' }),
+
+	$(' *', {
+		margin: 0,
+		padding: 0,
+		border: 0,
+	}),
 
 	$(' ul', {
 		position: 'relative',
 		overflow: 'hidden',
-		whiteSpace: 'nowrap'
+		whiteSpace: 'nowrap',
 	}),
 
 	$(' ul li', {
@@ -43,7 +50,7 @@ const style = merge(
 
 	$(' ul li img', {
 		width: '100%',
-		height: 'auto'
+		height: 'auto',
 	}),
 
 	$(' div', {
@@ -52,11 +59,11 @@ const style = merge(
 
 	$(' div a', {
 		color: 'black',
-		textDecoration: 'none'
+		textDecoration: 'none',
 	}),
 
 	$(' div a:active', {
-		color: 'red'
+		color: 'red',
 	}),
 
 );

@@ -17,13 +17,10 @@ var dd = (delay, duration) => ({animationDelay: delay+"s", animationDuration: du
 
 const style = merge(
 	{
-		paddingTop: '6px',
-		marginBottom: '-6px'
+		marginTop: '-14px',
+		fontSize: '32px',
 	},
 	$(' a', {
-		fontSize: '32px',
-		verticalAlign: 'text-bottom',
-
-		animationName: 'glitch'
+		animationName: 'glitch',
 	})
 );

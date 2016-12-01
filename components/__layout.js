@@ -1,67 +1,22 @@
 import React from 'react'
 import Head from 'next/head'
 import Header from '../components/header'
+import Typography from 'typography'
+import { TypographyStyle, GoogleFont } from 'react-typography'
+import irvingTheme from 'typography-theme-irving'
+const typography = new Typography(irvingTheme);
+
 export default ({ children }) => (
 	<div>
 		<Head>
 			<meta charSet="UTF-8" />
 			<meta name="viewport" content="width=device-width" />
-			<link href="https://fonts.googleapis.com/css?family=Exo:800" rel="stylesheet" />
+			<TypographyStyle typography={typography} />
+			<GoogleFont typography={typography} />
 			<style>{`
-
-h1, h2, h3, h4, h5, h6, figure, figcaption,
-html, body, div, form, fieldset, legend, label, 
-section, header, nav, ul, li { margin: 0; padding: 0; }
-table { border-collapse: collapse; border-spacing: 0; }
-th, td { text-align: left; vertical-align: top; } 
-h1, h2, h3, h4, h5, h6, th, td, caption { font-weight:normal; font-size: 1em; }
-img { border: 0; }
-
-section:not(:last-child) {
-	margin-bottom: 0.5em;
-}
-
-section ul {
-	margin-top: 0.4em;
-	margin-left: 1.4em;
-}
-
-section ul ul {
-	margin-top: 0.2em;
-}
-
-section li:not(:last-child) {
-	margin-bottom: 0.2em;
-}
-
-section li li:not(:last-child) {
-	margin-bottom: 0.1em;
-}
-
-
-h2 {
-	font-size: 32px;
-	margin-top: 0.5em;
-	margin-bottom: 0.3em;
-}
-
-h3 {
-	font-size: 24px;
-	margin-top: 0.3em;
-	margin-bottom: 0.2em;
-}
-
 a {
 	text-decoration: none;
 	color: inherit;
-}
-
-body {
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.display {
-	font-family: Exo, Arial, Helvetica, sans-serif;
 }
 
 			`}</style>

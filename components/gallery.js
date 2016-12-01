@@ -22,15 +22,27 @@ var style = merge(
 		display: 'flex',
 		flexFlow: 'row wrap',
 		width: '100%',
+		margin: 0,
+		padding: 0,
 	},
+
+	$(' *', {
+		margin: 0,
+		padding: 0,
+	}),
 
 	$(' li', {
 		display: 'inline-block',
 		position: 'relative',
 		transition: '0.25s all',
 		flex: '0 1',
-		flexBasis: '25%',
+		flexBasis: '50%',
 	}),
+
+	media('(max-width:  506px)', $(' li', { flexBasis:  '100%'    })),
+	media('(min-width: 1012px)', $(' li', { flexBasis:  '33%'    })),
+	media('(min-width: 1518px)', $(' li', { flexBasis:  '25%'    })),
+	media('(min-width: 2024px)', $(' li', { flexBasis:  '20%'    })),
 
 	$(' li:empty', {
 		height: 0,
@@ -62,14 +74,6 @@ var style = merge(
 	$(' li:hover figcaption', {
 		display: 'block',
 	}),
-
-	media('(max-width:  600px)', $(' li', { flexBasis:  '33%'    })),
-	media('(max-width:  400px)', $(' li', { flexBasis:  '50%'    })),
-	media('(max-width:  200px)', $(' li', { flexBasis: '100%'    })),
-	media('(min-width: 1000px)', $(' li', { flexBasis:  '20%'    })),
-	media('(min-width: 1200px)', $(' li', { flexBasis:  '16.66%' })),
-	media('(min-width: 1400px)', $(' li', { flexBasis:  '14.28%' })),
-	media('(min-width: 1600px)', $(' li', { flexBasis:  '12.5%'  })),
 
 );
 

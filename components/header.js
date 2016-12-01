@@ -22,10 +22,7 @@ const style = merge(
 		background: '#b44',
 		borderBottom: '2px solid #611',
 		fontSize: '24px',
-		paddingLeft: '9px',
-		paddingRight: '9px',
-		fontWeight: 'bold',
-		minHeight: '40px',
+		padding: '0 9px',
 	 
 		animationDelay: '1s',
 		animationDuration: '6s',
