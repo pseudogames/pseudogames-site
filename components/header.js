@@ -28,8 +28,14 @@ const style = merge(
 		animationDuration: '6s',
 		animationName: 'glitch',
 	},
+
+	$(' a', {
+		textDecoration: 'none',
+		color: 'inherit',
+	}),
+
 	$(' a:hover', {
-		color: "black !important"
+		color: "black",
 	})
 );
 

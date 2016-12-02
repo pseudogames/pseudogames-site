@@ -34,15 +34,17 @@ var style = merge(
 	$(' li', {
 		display: 'inline-block',
 		position: 'relative',
-		transition: '0.25s all',
 		flex: '0 1',
 		flexBasis: '50%',
 	}),
 
-	media('(max-width:  506px)', $(' li', { flexBasis:  '100%'    })),
-	media('(min-width: 1012px)', $(' li', { flexBasis:  '33%'    })),
-	media('(min-width: 1518px)', $(' li', { flexBasis:  '25%'    })),
-	media('(min-width: 2024px)', $(' li', { flexBasis:  '20%'    })),
+	media('(max-width:  240px)', $(' li', { flexBasis:  '100%'    })),
+	media('(min-width:  580px)', $(' li', { flexBasis:  '33.3%'    })),
+	media('(min-width:  720px)', $(' li', { flexBasis:  '25%'    })),
+	media('(min-width:  960px)', $(' li', { flexBasis:  '20%'    })),
+	media('(min-width: 1200px)', $(' li', { flexBasis:  '16.6%'    })),
+	media('(min-width: 1440px)', $(' li', { flexBasis:  '14.2%'    })),
+	media('(min-width: 1680px)', $(' li', { flexBasis:  '12.5%'    })),
 
 	$(' li:empty', {
 		height: 0,
