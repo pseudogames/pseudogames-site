@@ -38,13 +38,13 @@ var style = merge(
 		flexBasis: '50%',
 	}),
 
-	media('(max-width:  240px)', $(' li', { flexBasis:  '100%'    })),
-	media('(min-width:  580px)', $(' li', { flexBasis:  '33.3%'    })),
-	media('(min-width:  720px)', $(' li', { flexBasis:  '25%'    })),
-	media('(min-width:  960px)', $(' li', { flexBasis:  '20%'    })),
-	media('(min-width: 1200px)', $(' li', { flexBasis:  '16.6%'    })),
-	media('(min-width: 1440px)', $(' li', { flexBasis:  '14.2%'    })),
-	media('(min-width: 1680px)', $(' li', { flexBasis:  '12.5%'    })),
+	media('(max-width:  380px)', $(' li', { flexBasis:  '100%'    })),
+	media('(min-width:  640px)', $(' li', { flexBasis:  '33.3%'    })),
+	media('(min-width:  800px)', $(' li', { flexBasis:  '25%'    })),
+	media('(min-width: 1000px)', $(' li', { flexBasis:  '20%'    })),
+	media('(min-width: 1300px)', $(' li', { flexBasis:  '16.6%'    })),
+	media('(min-width: 1500px)', $(' li', { flexBasis:  '14.2%'    })),
+	media('(min-width: 1800px)', $(' li', { flexBasis:  '12.5%'    })),
 
 	$(' li:empty', {
 		height: 0,
@@ -63,7 +63,6 @@ var style = merge(
 	}),
 
 	$(' li figcaption', {
-		display: 'none',
 		position: 'absolute',
 		bottom: '0',
 		left: '0',
@@ -71,10 +70,11 @@ var style = merge(
 		background: 'rgba(0,0,0,0.6)',
 		color: 'white',
 		padding: '2px',
-	}),
 
-	$(' li:hover figcaption', {
-		display: 'block',
+		fontSize: '18px',
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		textOverflow: 'ellipsis',
 	}),
 
 );

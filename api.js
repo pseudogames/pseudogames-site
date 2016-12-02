@@ -38,7 +38,7 @@ function processFile(filename) {
 	let video = [];
 	video = glob.sync(`${base}/**/*.mp4`).map( path => ({type: "video", url: path}) );
 	let yt = [];
-	content = content.replace(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/(?:watch\?v=|embed\/)|\.be\/)([\w\-\_]*)(&[\w\?=]*)?\r?\n?/g, (_,id) => {
+	content = content.replace(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/(?:watch\?v=|embed\/)|\.be\/)([\w\-\_]*)(&[\w\?=]*)?\r?\n/g, (_,id) => {
 		yt.push({type: "youtube", id: id});
 		return "";
 	});
@@ -64,15 +64,20 @@ function processFile(filename) {
 		return label;
 	}).join("");
 
-	content = content.replace(/\nlinks?\r?\n----*\r?\n/i, heading => `${heading}${web}${bin}`);
+	let injected = false;
+	var inject = web + bin;
+	content = content.replace(/\nlinks?\r?\n----*\r?\n/i, heading => { injected = true; return `${heading}${inject}` } );
+	if(!injected) {
+		content = content.replace(/\n\w+\r?\n----*\r?\n/i, heading => { injected = true; return `LINK\n----\n${inject}\n${heading}` } );
+	}
 
 	// result
 	release[id] = {
 		info: info,
 		content: content,
-		media: yt.concat(video).concat(image)
-	};
-}
+		media: image.concat(video).concat(yt),
+		};
+		}
 
 function normPath(path) {
 	return path.replace(/\\/g, "/");

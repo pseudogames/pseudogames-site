@@ -3,26 +3,21 @@ import {merge, select as $, media} from 'next/css'
 import Link from 'next/link'
 import YouTube from 'react-youtube'
 
-var id = 0;
-
 export default (props) => {
 	let index = [];
-	var last = props.media.length-1;
-	let list = props.media.map((item, i) => {
-		let next = "#"+(id+(i == last ? -last : +1));
-		if(last > 0)
-			index.push(<a key={"i"+id} href={"#"+id}>&#x25cf;</a>);
-		return <li key={"m"+id} id={id++}>{
+	let len = props.media.length;
+	let list = props.media.map((item, id) => {
+		if(len > 1)
+			index.push(<a key={id} href={"#"+id}>&#x25cf;</a>);
+		return <li key={id} id={id}>{
 			item.type == "youtube" ?
-				<YouTube videoId={item.id} opts={{width: '100%'}}/>
+				<YouTube videoId={item.id} opts={{width: '100%', height: '400px'}}/>
 			: item.type == "video" ?
 				<video controls width="100%" height="100%">
 					<source src={item.url} type="video/mp4"/>
 				</video>
 			: // item.type == "image" ?
-				<a href={next}>
-					<img src={item.url} />
-				</a>
+				<a href={"#"+((id + 1) % len)} style={{backgroundImage: `url("${item.url}")`}} />
 		}</li>
 	});
 	return <div className={style}>
@@ -57,27 +52,30 @@ const style = merge(
 		width: '100%',
 	}),
 
-	$(' ul li img', {
+	$(' ul li a', {
+		display: 'block',
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
 		width: '100%',
-		height: 'auto',
+		height: '400px',
 	}),
 
 	$(' ul li video', {
 		width: '100%',
-		margin: '0 auto',
+		height: '400px',
 	}),
 
 	$(' div', {
 		textAlign: 'center'
 	}),
 
-	$(' div a', {
+	$(' div > a', {
 		color: 'black',
 		textDecoration: 'none',
 	}),
 
-	$(' div a:active', {
-		color: 'red',
+	$(' div > a:active', {
+		color: 'darkred',
 	}),
 
 );
