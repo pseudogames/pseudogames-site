@@ -19,10 +19,11 @@ function processFile(filename) {
 	let id = part[1];
 	let base = `${root}/${id}`;
 	let index = part[2] ? filename : glob.sync(`${base}/*.md`)[0];
+	console.log(index, part);
 
 	// content
 	if(!index) return;
-	let content = fs.readFileSync(filename);
+	let content = fs.readFileSync(index);
 	if(!content) return;
 	content = content.toString();
 
