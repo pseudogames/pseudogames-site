@@ -24,6 +24,7 @@ var style = merge(
 		width: '100%',
 		margin: 0,
 		padding: 0,
+		backgroundColor: '#400',
 	},
 
 	$(' *', {
@@ -36,15 +37,22 @@ var style = merge(
 		position: 'relative',
 		flex: '0 1',
 		flexBasis: '50%',
+		border: '1px solid #300',
+		opacity: 0.75,
+		transition: 'opacity 0.15s',
 	}),
 
-	media('(max-width:  380px)', $(' li', { flexBasis:  '100%'    })),
-	media('(min-width:  640px)', $(' li', { flexBasis:  '33.3%'    })),
-	media('(min-width:  800px)', $(' li', { flexBasis:  '25%'    })),
-	media('(min-width: 1000px)', $(' li', { flexBasis:  '20%'    })),
-	media('(min-width: 1300px)', $(' li', { flexBasis:  '16.6%'    })),
-	media('(min-width: 1500px)', $(' li', { flexBasis:  '14.2%'    })),
-	media('(min-width: 1800px)', $(' li', { flexBasis:  '12.5%'    })),
+	$(' li:hover', {
+		opacity: 1,
+	}),
+
+	media('(max-width:  380px)', $(' li', { flexBasis: '100%'   })),
+	media('(min-width:  640px)', $(' li', { flexBasis:  '33.3%' })),
+	media('(min-width:  800px)', $(' li', { flexBasis:  '25%'   })),
+	media('(min-width: 1000px)', $(' li', { flexBasis:  '20%'   })),
+	media('(min-width: 1300px)', $(' li', { flexBasis:  '16.6%' })),
+	media('(min-width: 1500px)', $(' li', { flexBasis:  '14.2%' })),
+	media('(min-width: 1800px)', $(' li', { flexBasis:  '12.5%' })),
 
 	$(' li:empty', {
 		height: 0,
@@ -67,9 +75,9 @@ var style = merge(
 		bottom: '0',
 		left: '0',
 		right: '0',
-		background: 'rgba(0,0,0,0.6)',
+		background: 'rgba(0,0,0,0.75)',
 		color: 'white',
-		padding: '2px',
+		padding: '4px',
 
 		fontSize: '18px',
 		whiteSpace: 'nowrap',

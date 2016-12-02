@@ -35,7 +35,7 @@ const style = merge(
 	}),
 
 	$(' a:hover', {
-		color: "black",
+		color: "#411",
 	})
 );
 

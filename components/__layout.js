@@ -3,8 +3,24 @@ import Head from 'next/head'
 import Header from '../components/header'
 import Typography from 'typography'
 import { TypographyStyle, GoogleFont } from 'react-typography'
-import irvingTheme from 'typography-theme-irving'
-const typography = new Typography(irvingTheme);
+import irving from 'typography-theme-irving'
+import { TABLET_MEDIA_QUERY } from 'typography-breakpoint-constants'
+
+irving.overrideThemeStyles = ({ }, options) => ({
+	'blockquote': {
+		marginLeft: '1.5em',
+		fontSize: '1em',
+		fontStyle: 'italic',
+		borderLeft: '4px solid silver',
+	},
+	[TABLET_MEDIA_QUERY]: {
+		'blockquote': {
+			marginLeft: '0.5em',
+		},
+	},
+});
+
+const typography = new Typography(irving);
 
 export default ({ children }) => (
 	<div>
