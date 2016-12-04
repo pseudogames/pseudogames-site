@@ -19,7 +19,6 @@ function processFile(filename) {
 	let id = part[1];
 	let base = `${root}/${id}`;
 	let index = part[2] ? filename : glob.sync(`${base}/*.md`)[0];
-	console.log(index, part);
 
 	// content
 	if(!index) return;
@@ -67,9 +66,11 @@ function processFile(filename) {
 
 	let injected = false;
 	var inject = web + bin;
-	content = content.replace(/\nlinks?\r?\n----*\r?\n/i, heading => { injected = true; return `${heading}${inject}` } );
-	if(!injected) {
-		content = content.replace(/\n\w+\r?\n----*\r?\n/i, heading => { injected = true; return `LINK\n----\n${inject}\n${heading}` } );
+	if(inject.length > 0) {
+		content = content.replace(/\nlinks?\r?\n----*\r?\n/i, heading => { injected = true; return `${heading}${inject}` } );
+		if(!injected) {
+			content = content.replace(/\n\w+\r?\n----*\r?\n/i, heading => { injected = true; return `LINK\n----\n${inject}\n${heading}` } );
+		}
 	}
 
 	// result
@@ -107,8 +108,8 @@ let server = http.createServer(function(request, response) {
 			result = ids.map(id => {
 				let r = release[id].info;
 				let label = r.title;
-				if(r.jam) label += ` @ ${r.jam}`;
 				if(r.date) label += `, ${r.date.substring(0,4)}`;
+				if(r.jam) label += ` @ ${r.jam}`;
 				return {
 					id: id,
 					label: label,
