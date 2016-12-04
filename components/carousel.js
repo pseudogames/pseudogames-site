@@ -57,7 +57,7 @@ const style = merge(
 		display: 'block',
 		backgroundSize: 'cover',
 		backgroundPosition: 'left top',
-		transition: 'background-position 12s linear',
+		transition: 'background-position 6s linear',
 		width: '100%',
 		height: '360px',
 	}),

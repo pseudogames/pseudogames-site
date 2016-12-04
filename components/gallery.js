@@ -54,12 +54,12 @@ var style = merge(
 		width: '100%',
 		height: '100%',
 		backgroundSize: 'cover',
-		backgroundPosition: 'right top',
+		backgroundPosition: 'left top',
 		transition: 'background-position 1s ease',
 	}),
 
 	$(' li:hover figure', {
-		backgroundPosition: 'left bottom',
+		backgroundPosition: 'right bottom',
 	}),
 
 	$(' li:empty', {
