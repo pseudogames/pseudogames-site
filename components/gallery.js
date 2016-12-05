@@ -55,7 +55,7 @@ var style = merge(
 		height: '100%',
 		backgroundSize: 'cover',
 		backgroundPosition: 'left top',
-		transition: 'background-position 1s ease',
+		transition: 'background-position 1s cubic-bezier(1.000, 0.000, 0.000, 1.000)',
 	}),
 
 	$(' li:hover figure', {
