@@ -6,7 +6,7 @@ import Gallery from '../components/gallery'
 export default class extends React.Component {
 
 	static async getInitialProps () {
-		const res = await fetch('http://localhost:3001/api/project/');
+		const res = await fetch('http://pseudogames.com:3001/api/project/');
 		return { list: await res.json() };
 	}
 

@@ -2,15 +2,13 @@ const http = require('http');
 const fs = require('fs');
 const Path = require('path');
 const glob = require('glob');
-const debounce = require('debounce');
 const commonmark = require('commonmark')
+var gaze = require('gaze');
 
 const root = 'static/release';
 var release = {};
 
-var log = console.log;
 function processFile(filename) {
-	//console.log = filename == 'static/release/cave9/cave9.md' ? log : () => 1; // XXX debug
 	console.log(filename);
 
 	let regex = new RegExp(`^${root}/(\\w+)/.*?(\\.md)?$`);
@@ -29,6 +27,7 @@ function processFile(filename) {
 	// media
 	let thumb;
 	let image = glob.sync(`${base}/**/*.{jpeg,jpg,png,gif}`).filter( path => {
+		if(path.match(/\/web(?:gj)?\//)) return;
 		let t = path.match(/thumb[^\/]*$/);
 		if(t) thumb = path;
 		return !t;
@@ -55,17 +54,23 @@ function processFile(filename) {
 	});
 
 	// links
-	let web = glob.sync(`${base}/**/web*/`).map( path => `* [Play Now!](${path})\n` ).join("");
+	let phase = (path) => {
+		let p = path.match(/\/(?:(?:pre-?)?alpha|beta|final)\//);
+		return p == null ? "" : `${p[0]} `;
+	};
+	let web = glob.sync(`${base}/**/web*/*.html`).map( path => {
+		return `* [${phase(path)}Play Now!](${path})\n`;
+	});
 	let bin = glob.sync(`${base}/**/*.zip`).map( path => {
 		let stat = fs.statSync(path);
 		let name = Path.basename(path);
-		let size = Math.round(stat["size"] / 1024 / 1024);
-		let label = `* [${name} (${size}Mb)](${path})\n`;
+		let size = Math.round(stat["size"] * 10 / 1024 / 1024) / 10;
+		let label = `* [${phase(path)}${name} (${size}Mb)](${path})\n`;
 		return label;
-	}).join("");
+	});
 
 	let injected = false;
-	var inject = web + bin;
+	var inject = web.concat(bin).sort().join("");
 	if(inject.length > 0) {
 		content = content.replace(/\nlinks?\r?\n----*\r?\n/i, heading => { injected = true; return `${heading}${inject}` } );
 		if(!injected) {
@@ -78,16 +83,19 @@ function processFile(filename) {
 		info: info,
 		content: content,
 		media: image.concat(video).concat(yt),
-		};
-		}
-
-function normPath(path) {
-	return path.replace(/\\/g, "/");
+	};
 }
 
-fs.watch(root, {recursive:true}, debounce((eventType, filename) => {
-	processFile(root+"/"+normPath(filename));
-}), 200, true);
+function normPath(path) {
+	return Path.relative(".",path.replace(/\\/g, "/"));
+}
+
+gaze(`${root}/**/*`, function(err, watcher) {
+  this.on('all', function(event, filepath) {
+	processFile(normPath(filepath));
+  });
+
+});
 
 glob(`${root}/*/*.md`, {}, (err,files) => {
 	if(err) return console.log("err:", err);
@@ -128,5 +136,5 @@ let server = http.createServer(function(request, response) {
 		response.write(JSON.stringify(result));
 	}
 	response.end();
-}).listen(3001);
+}).listen(3001,"0.0.0.0");
 

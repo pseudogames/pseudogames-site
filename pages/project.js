@@ -9,7 +9,7 @@ import Carousel from '../components/carousel'
 export default class extends React.Component {
 
 	static async getInitialProps ({query}) {
-		const res = await fetch(`http://localhost:3001/api/project/${query.id}`);
+		const res = await fetch(`http://pseudogames.com:3001/api/project/${query.id}`);
 		return { project: await res.json() };
 	}
 
