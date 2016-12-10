@@ -15,7 +15,7 @@ no coin should be untouched.
 LINK
 ----
 * [Jam page](https://www.goethe.de/ins/br/pt/kul/sup/game-mixer.html)
-* [Jam pic](https://twitter.com/goethesaopaulo/status/795026294819930113/photo/1?ref_src=twsrc%5Etfw)
+* [Jam picture](https://twitter.com/goethesaopaulo/status/795026294819930113/photo/1?ref_src=twsrc%5Etfw)
 
 CONTROL
 -------

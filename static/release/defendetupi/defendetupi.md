@@ -1,7 +1,7 @@
 Defende Tupi!
 =============
 
-The native brazilian indigenous people the Tupi are defending themselves in all the ways
+The native brazilian indigenous people, the Tupi, are defending themselves, in all the ways
 they can manage, against the reckless advances of the portuguese conquerors.
 
 * date: 2016-11-15

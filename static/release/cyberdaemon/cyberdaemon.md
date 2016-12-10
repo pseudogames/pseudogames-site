@@ -4,7 +4,7 @@ Cyberdaemon
 * date: 1999
 * team: 9hells
 
-Autonomous Quake 1 robot, initially hacked from the protocol and map files and later integrated on the oppened source code.
+Autonomous Quake 1 robot, initially hacked from the protocol and map files and later integrated on the open source Quake.
 
 > Sistema de navegação em ambientes virtuais 3D
 >
@@ -25,5 +25,5 @@ CREDIT
 * Daniel "dbb" Borges
 * Gabriel "brainman" Blum
 * Rodrigo Goulart Do Nascimento
-* platform: C, Quake
+* platform: C, Quake 1
 
